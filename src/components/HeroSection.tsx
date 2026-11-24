@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { RefreshCw, ShieldCheck, Sparkles } from 'lucide-react';
+import { Image, Mail, RefreshCw, ShieldCheck, Sparkles } from 'lucide-react';
 import type { PersonalProfile } from '../data/profile';
 import { MinimalAvatar } from './MinimalAvatar';
 
 interface HeroSectionProps {
   profile: PersonalProfile;
+  onSelectTab: (tabId: string) => void;
   onOpenCustomize: () => void;
 }
 
 type AvatarMode = 'portrait' | 'sketch';
 
-export function HeroSection({ profile, onOpenCustomize }: HeroSectionProps) {
+export function HeroSection({ profile, onSelectTab, onOpenCustomize }: HeroSectionProps) {
   const [avatarMode, setAvatarMode] = useState<AvatarMode>('portrait');
   const [flipCount, setFlipCount] = useState(0);
 
@@ -130,19 +131,24 @@ export function HeroSection({ profile, onOpenCustomize }: HeroSectionProps) {
         </div>
       </div>
 
+      {/* Updated CTAs: Contact & Gallery */}
       <div className="mt-6 flex flex-wrap items-center gap-3 border-t-2 border-[#E4ECE7] pt-4 sm:pt-5 dark:border-[#24382E]">
-        <a
-          href="#about"
-          className="inline-flex min-h-[42px] items-center justify-center rounded-xl bg-[#047857] px-6 py-2.5 text-xs font-bold text-white shadow-md transition-colors hover:bg-[#065F46] cursor-pointer sm:text-sm"
+        <button
+          type="button"
+          onClick={() => onSelectTab('contact')}
+          className="inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl bg-[#047857] px-6 py-2.5 text-xs font-bold text-white shadow-md transition-colors hover:bg-[#065F46] cursor-pointer sm:text-sm"
         >
-          Explore My World
-        </a>
-        <a
-          href="#projects"
-          className="inline-flex min-h-[42px] items-center justify-center rounded-xl border-2 border-[#D8E6DE] bg-white px-6 py-2.5 text-xs font-bold text-[#0E1813] transition-colors hover:border-emerald-700/50 cursor-pointer sm:text-sm dark:border-[#24382E] dark:bg-[#121B16] dark:text-white"
+          <Mail className="h-4 w-4" />
+          <span>Contact</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => onSelectTab('gallery')}
+          className="inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl border-2 border-[#D8E6DE] bg-white px-6 py-2.5 text-xs font-bold text-[#0E1813] transition-colors hover:border-emerald-700/50 cursor-pointer sm:text-sm dark:border-[#24382E] dark:bg-[#121B16] dark:text-white"
         >
-          View My Projects
-        </a>
+          <Image className="h-4 w-4 text-emerald-700 dark:text-emerald-400" />
+          <span>Gallery</span>
+        </button>
       </div>
     </section>
   );
