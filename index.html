@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abdullahil Kuafi — About Me &amp; Stories</title>
+    <meta
+      name="description"
+      content="Personal page, stories, and journey of Abdullahil Kuafi — student at Government Titumir College, Dhaka, and independent Android & web developer."
+    />
+    <meta property="og:title" content="Abdullahil Kuafi — About Me & Stories" />
+    <meta
+      property="og:description"
+      content="Personal page, stories, and journey of Abdullahil Kuafi from Dhaka, Bangladesh."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#F7FAF8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#080C0A" media="(prefers-color-scheme: dark)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('kuafi-theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (!saved && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-[#F7FAF8] text-[#0E1813] dark:bg-[#080C0A] dark:text-[#EFF4F1] antialiased selection:bg-emerald-600/20 selection:text-emerald-900 dark:selection:bg-emerald-400/25 dark:selection:text-emerald-100">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
