@@ -2,26 +2,39 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import {
   BookOpen,
+  Briefcase,
   Code2,
+  Compass,
+  FolderKanban,
+  Globe,
+  GraduationCap,
   Image,
   Mail,
   MapPin,
   RefreshCw,
   ShieldCheck,
+  Smartphone,
   Sparkles,
 } from 'lucide-react';
 import { IDENTITY_PILLARS, type PersonalProfile } from '../data/profile';
 import { MinimalAvatar } from './MinimalAvatar';
+import type { ProjectFilter } from './ProjectsSection';
 
 interface HeroSectionProps {
   profile: PersonalProfile;
   onSelectTab: (tabId: string) => void;
+  onSelectProjects: (filter?: ProjectFilter) => void;
   onOpenCustomize: () => void;
 }
 
 type AvatarMode = 'portrait' | 'sketch';
 
-export function HeroSection({ profile, onSelectTab, onOpenCustomize }: HeroSectionProps) {
+export function HeroSection({
+  profile,
+  onSelectTab,
+  onSelectProjects,
+  onOpenCustomize,
+}: HeroSectionProps) {
   const [avatarMode, setAvatarMode] = useState<AvatarMode>('portrait');
   const [flipCount, setFlipCount] = useState(0);
 
@@ -203,24 +216,99 @@ export function HeroSection({ profile, onSelectTab, onOpenCustomize }: HeroSecti
         </div>
       </div>
 
-      {/* CTAs: Contact & Gallery */}
-      <div className="mt-3 flex items-center gap-2.5 border-t-2 border-[#E4ECE7] pt-3 sm:mt-5 sm:gap-3 sm:pt-4 dark:border-[#24382E]">
-        <button
-          type="button"
-          onClick={() => onSelectTab('contact')}
-          className="inline-flex min-h-[40px] flex-1 items-center justify-center gap-2 rounded-xl bg-[#047857] px-4 py-2 text-xs font-bold text-white shadow-md transition-colors hover:bg-[#065F46] cursor-pointer sm:min-h-[42px] sm:flex-initial sm:px-6 sm:py-2.5 sm:text-sm"
-        >
-          <Mail className="h-4 w-4" />
-          <span>Contact</span>
-        </button>
-        <button
-          type="button"
-          onClick={() => onSelectTab('gallery')}
-          className="inline-flex min-h-[40px] flex-1 items-center justify-center gap-2 rounded-xl border-2 border-[#D8E6DE] bg-white px-4 py-2 text-xs font-bold text-[#0E1813] transition-colors hover:border-emerald-700/50 cursor-pointer sm:min-h-[42px] sm:flex-initial sm:px-6 sm:py-2.5 sm:text-sm dark:border-[#24382E] dark:bg-[#121B16] dark:text-white"
-        >
-          <Image className="h-4 w-4 text-emerald-700 dark:text-emerald-400" />
-          <span>Gallery</span>
-        </button>
+      {/* Unified Border Box: 8 Homepage Menus in Bold & Same Format */}
+      <div className="mt-2.5 border-t border-[#E4ECE7] pt-2.5 sm:mt-4 sm:border-t-2 sm:pt-4 dark:border-[#24382E]">
+        <div className="rounded-2xl border-2 border-[#D8E6DE] bg-[#F4F8F5]/75 p-2 shadow-xs sm:p-3.5 dark:border-[#24382E] dark:bg-[#101814]/90">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2.5">
+            <button
+              type="button"
+              onClick={() => onSelectProjects('All')}
+              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+            >
+              <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
+                <FolderKanban className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
+                <span>Projects</span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onSelectProjects('Android Applications')}
+              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+            >
+              <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
+                <Smartphone className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
+                <span>Android Apps</span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onSelectProjects('Websites')}
+              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+            >
+              <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
+                <Globe className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
+                <span>Websites</span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onSelectTab('education')}
+              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+            >
+              <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
+                <GraduationCap className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
+                <span>Education</span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onSelectTab('philosophy')}
+              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+            >
+              <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
+                <Compass className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
+                <span>Philosophy</span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onSelectTab('journey')}
+              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+            >
+              <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
+                <Briefcase className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
+                <span>Work</span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onSelectTab('contact')}
+              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+            >
+              <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
+                <Mail className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
+                <span>Contact</span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onSelectTab('gallery')}
+              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+            >
+              <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
+                <Image className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
+                <span>Gallery</span>
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -14,12 +14,14 @@ import type { ProjectItem } from '../data/profile';
 
 interface ProjectsSectionProps {
   projects: ProjectItem[];
+  activeFilter?: ProjectFilter;
+  onFilterChange?: (filter: ProjectFilter) => void;
   onAddProject: (project: ProjectItem) => void;
   onDeleteProject: (projectId: string) => void;
   onNavigateContact?: () => void;
 }
 
-type ProjectFilter = 'All' | ProjectItem['category'];
+export type ProjectFilter = 'All' | ProjectItem['category'];
 
 const CATEGORIES: ProjectFilter[] = [
   'All',
@@ -33,12 +35,20 @@ const CATEGORIES: ProjectFilter[] = [
 
 export function ProjectsSection({
   projects,
+  activeFilter,
+  onFilterChange,
   onAddProject,
   onDeleteProject,
   onNavigateContact,
 }: ProjectsSectionProps) {
-  const [activeFilter, setActiveFilter] = useState<ProjectFilter>('All');
+  const [internalFilter, setInternalFilter] = useState<ProjectFilter>('All');
   const [modalOpen, setModalOpen] = useState(false);
+
+  const currentFilter = activeFilter ?? internalFilter;
+  const handleFilterSelect = (nextFilter: ProjectFilter) => {
+    setInternalFilter(nextFilter);
+    onFilterChange?.(nextFilter);
+  };
 
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState<ProjectItem['category']>('Websites');
@@ -50,9 +60,9 @@ export function ProjectsSection({
   const [logoUrl, setLogoUrl] = useState('');
 
   const filteredProjects =
-    activeFilter === 'All'
+    currentFilter === 'All'
       ? projects
-      : projects.filter((p) => p.category === activeFilter);
+      : projects.filter((p) => p.category === currentFilter);
 
   const handleCreateProject = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -133,14 +143,14 @@ export function ProjectsSection({
         className="mt-6 flex flex-wrap items-center gap-1.5 rounded-xl border-2 border-[#D8E6DE] bg-[#EEF4F1] p-1.5 shadow-xs transition-colors duration-300 dark:border-[#24382E] dark:bg-[#121B16]"
       >
         {CATEGORIES.map((cat) => {
-          const isActive = cat === activeFilter;
+          const isActive = cat === currentFilter;
           return (
             <button
               key={cat}
               role="tab"
               type="button"
               aria-selected={isActive}
-              onClick={() => setActiveFilter(cat)}
+              onClick={() => handleFilterSelect(cat)}
               className={`relative min-h-[36px] rounded-lg px-3.5 py-1 text-xs font-bold transition-colors duration-200 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 ${
                 isActive
                   ? 'text-emerald-900 dark:text-emerald-200'
@@ -165,7 +175,7 @@ export function ProjectsSection({
         <div className="mt-6 border-t-2 border-[#E4ECE7] pt-6 dark:border-[#24382E]">
           <div className="rounded-2xl border-2 border-dashed border-[#D8E6DE] bg-[#F4F8F5] p-8 text-center dark:border-[#24382E] dark:bg-[#121B16]">
             <p className="text-sm font-semibold text-[#384A41] dark:text-[#A4B8AE]">
-              No projects in &ldquo;{activeFilter}&rdquo; yet. Use &ldquo;Add New Project&rdquo; to
+              No projects in &ldquo;{currentFilter}&rdquo; yet. Use &ldquo;Add New Project&rdquo; to
               record one anytime.
             </p>
           </div>

@@ -7,7 +7,7 @@ import { EducationSection } from './components/EducationSection';
 import { JourneySection } from './components/JourneySection';
 import { ExpertiseSection } from './components/ExpertiseSection';
 import { TechnologySection } from './components/TechnologySection';
-import { ProjectsSection } from './components/ProjectsSection';
+import { ProjectsSection, type ProjectFilter } from './components/ProjectsSection';
 import { PlaygroundSection } from './components/PlaygroundSection';
 import { PhilosophySection } from './components/PhilosophySection';
 import { BeyondWorkSection } from './components/BeyondWorkSection';
@@ -38,6 +38,7 @@ export default function App() {
   const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
   const [profile, setProfile] = useState<PersonalProfile>(loadSavedProfile);
   const [activeTab, setActiveTab] = useState<string>('overview');
+  const [projectFilter, setProjectFilter] = useState<ProjectFilter>('All');
   const [customizeOpen, setCustomizeOpen] = useState(false);
 
   useEffect(() => {
@@ -113,7 +114,16 @@ export default function App() {
   };
 
   const handleSelectTab = (tabId: string) => {
+    if (tabId === 'projects') {
+      setProjectFilter('All');
+    }
     setActiveTab(tabId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenProjects = (filter: ProjectFilter = 'All') => {
+    setProjectFilter(filter);
+    setActiveTab('projects');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -138,6 +148,7 @@ export default function App() {
             <HeroSection
               profile={profile}
               onSelectTab={handleSelectTab}
+              onSelectProjects={handleOpenProjects}
               onOpenCustomize={() => setCustomizeOpen(true)}
             />
           )}
@@ -155,6 +166,8 @@ export default function App() {
           {activeTab === 'projects' && (
             <ProjectsSection
               projects={profile.projects}
+              activeFilter={projectFilter}
+              onFilterChange={setProjectFilter}
               onAddProject={handleAddProject}
               onDeleteProject={handleDeleteProject}
               onNavigateContact={() => handleSelectTab('contact')}
