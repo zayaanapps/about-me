@@ -31,7 +31,7 @@ export function HeroSection({ profile, onSelectTab, onOpenCustomize }: HeroSecti
     <section
       id="hero"
       aria-label="Profile Card section"
-      className="relative flex min-h-[calc(100vh-8rem)] flex-col justify-between overflow-hidden rounded-none border-x-0 border-b-2 border-t-0 border-[#D8E6DE] bg-white px-4 py-5 shadow-none sm:rounded-3xl sm:border-2 sm:px-10 sm:py-10 dark:border-[#24382E] dark:bg-[#0D1411]"
+      className="relative flex flex-1 flex-col justify-between overflow-hidden rounded-none border-x-0 border-b-0 border-t-0 border-[#D8E6DE] bg-white px-4 py-5 shadow-none sm:rounded-3xl sm:border-2 sm:px-10 sm:py-10 dark:border-[#24382E] dark:bg-[#0D1411]"
     >
       <div>
         {/* Canopy */}

@@ -41,8 +41,12 @@ export function ContactSection({ profile }: ContactSectionProps) {
     {
       id: 'whatsapp',
       label: 'WhatsApp',
-      caption: 'Quick message',
-      href: profile.socials.whatsapp || 'https://wa.me',
+      caption: (() => {
+        const wa = profile.socials.whatsapp || 'https://wa.me/8801313209156';
+        const match = wa.match(/wa\.me\/(\d+)/);
+        return match ? `+${match[1]}` : 'Quick message';
+      })(),
+      href: profile.socials.whatsapp || 'https://wa.me/8801313209156',
       external: true,
       icon: <MessageCircle className="h-4 w-4 text-emerald-700 dark:text-emerald-400" />,
     },

@@ -70,7 +70,7 @@ export const DEFAULT_PROFILE: PersonalProfile = {
   socials: {
     facebook: 'https://facebook.com',
     messenger: 'https://m.me',
-    whatsapp: 'https://wa.me',
+    whatsapp: 'https://wa.me/8801313209156',
     github: 'https://github.com',
     linkedin: 'https://linkedin.com',
     website: '',
@@ -330,6 +330,10 @@ export function loadSavedProfile(): PersonalProfile {
       socials: {
         ...DEFAULT_PROFILE.socials,
         ...(parsed.socials ?? {}),
+        whatsapp:
+          !parsed.socials?.whatsapp || parsed.socials.whatsapp === 'https://wa.me'
+            ? DEFAULT_PROFILE.socials.whatsapp
+            : parsed.socials.whatsapp,
       },
       currentlyExploring:
         Array.isArray(parsed.currentlyExploring) && parsed.currentlyExploring.length > 0

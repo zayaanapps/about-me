@@ -121,7 +121,7 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <div
         id="top"
-        className="min-h-screen bg-[#F7FAF8] text-[#0E1813] transition-colors duration-300 dark:bg-[#080C0A] dark:text-[#EFF4F1]"
+        className="flex min-h-dvh flex-col bg-[#F7FAF8] text-[#0E1813] transition-colors duration-300 dark:bg-[#080C0A] dark:text-[#EFF4F1]"
       >
         <Navbar
           name={profile.name}
@@ -132,7 +132,7 @@ export default function App() {
           onOpenCustomize={() => setCustomizeOpen(true)}
         />
 
-        <main className="mx-auto max-w-5xl px-0 py-0 sm:px-8 sm:py-6">
+        <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-0 py-0 sm:px-8 sm:pt-6 sm:pb-3">
           {activeTab === 'overview' && (
             <HeroSection
               profile={profile}
@@ -176,40 +176,41 @@ export default function App() {
           {activeTab === 'contact' && <ContactSection profile={profile} />}
         </main>
 
-        {/* Minimal + Compact + Decorated + Beautiful + Bordered + Iconed Footer */}
-        <footer className="mx-auto max-w-5xl px-4 py-6 sm:px-8">
-          <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border-2 border-[#D8E6DE] bg-white px-6 py-4 shadow-sm sm:flex-row dark:border-[#24382E] dark:bg-[#0D1411]">
-            <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300">
-                <ShieldCheck className="h-4 w-4" />
+        {/* Minimal + Compact + Full-Bleed Android Footer attached to Profile Card */}
+        <footer className="mx-auto w-full max-w-5xl px-0 py-0 sm:px-8 sm:pt-3 sm:pb-6">
+          <div className="flex flex-row items-center justify-between gap-2 rounded-none border-x-0 border-b-0 border-t-2 border-[#D8E6DE] bg-white px-4 py-2.5 shadow-none sm:gap-4 sm:rounded-2xl sm:border-2 sm:px-6 sm:py-3.5 sm:shadow-sm dark:border-[#24382E] dark:bg-[#0D1411]">
+            <div className="flex min-w-0 items-center gap-2.5">
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-800 sm:h-8 sm:w-8 sm:rounded-xl dark:bg-emerald-950/80 dark:text-emerald-300">
+                <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </div>
-              <div className="text-center sm:text-left">
-                <p className="text-xs font-bold text-[#0E1813] dark:text-white">
+              <div className="min-w-0">
+                <p className="truncate text-xs font-bold text-[#0E1813] dark:text-white">
                   {profile.name}
                 </p>
-                <p className="text-[11px] font-medium text-[#52665C] dark:text-[#8AA095]">
-                  Professional by Experience · Curious by Nature
+                <p className="truncate text-[10px] font-medium text-[#52665C] sm:text-[11px] dark:text-[#8AA095]">
+                  © {new Date().getFullYear()} · Curious by Nature
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
               <button
                 type="button"
                 onClick={() => setCustomizeOpen(true)}
-                className="inline-flex min-h-[34px] items-center gap-1.5 rounded-xl border border-[#D8E6DE] bg-[#F4F8F5] px-3.5 py-1 text-xs font-bold text-[#3E5147] transition-colors hover:border-emerald-700/50 cursor-pointer dark:border-[#24382E] dark:bg-[#121B16] dark:text-[#A4B8AE]"
+                className="inline-flex min-h-[34px] items-center gap-1 rounded-lg border border-[#D8E6DE] bg-[#F4F8F5] px-2.5 py-1 text-[11px] font-bold text-[#3E5147] transition-colors hover:border-emerald-700/50 whitespace-nowrap cursor-pointer sm:rounded-xl sm:px-3.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-[#A4B8AE]"
               >
-                <Heart className="h-3.5 w-3.5 text-emerald-700 dark:text-emerald-400" />
+                <Heart className="h-3 w-3 text-emerald-700 sm:h-3.5 sm:w-3.5 dark:text-emerald-400" />
                 <span>Customize</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleSelectTab('overview')}
-                className="inline-flex min-h-[34px] items-center gap-1.5 rounded-xl border border-[#D8E6DE] bg-[#F4F8F5] px-3.5 py-1 text-xs font-bold text-[#3E5147] transition-colors hover:border-emerald-700/50 cursor-pointer dark:border-[#24382E] dark:bg-[#121B16] dark:text-[#A4B8AE]"
+                aria-label="Scroll to top"
+                className="inline-flex min-h-[34px] items-center gap-1 rounded-lg border border-[#D8E6DE] bg-[#F4F8F5] px-2.5 py-1 text-[11px] font-bold text-[#3E5147] transition-colors hover:border-emerald-700/50 whitespace-nowrap cursor-pointer sm:rounded-xl sm:px-3.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-[#A4B8AE]"
               >
                 <span>Top</span>
-                <ArrowUp className="h-3.5 w-3.5 text-emerald-700 dark:text-emerald-400" />
+                <ArrowUp className="h-3 w-3 text-emerald-700 sm:h-3.5 sm:w-3.5 dark:text-emerald-400" />
               </button>
             </div>
           </div>
