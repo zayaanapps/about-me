@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MoreVertical, Moon, SlidersHorizontal, Sun } from 'lucide-react';
 import { DEFAULT_PORTRAIT_SRC } from '../data/profile';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface NavbarProps {
   name: string;
@@ -95,6 +96,8 @@ export function Navbar({
 
         {/* Quick Actions & 3-Dot Menu */}
         <div className="flex items-center gap-2 shrink-0">
+          <PWAInstallButton variant="header" />
+
           <button
             type="button"
             onClick={onToggleTheme}
@@ -163,6 +166,10 @@ export function Navbar({
                         </button>
                       );
                     })}
+                  </div>
+
+                  <div className="mt-1 border-t border-[#E4ECE7] px-2 pt-1.5 dark:border-[#24382E]">
+                    <PWAInstallButton variant="menu" onAfterClick={() => setMenuOpen(false)} />
                   </div>
                 </motion.div>
               )}

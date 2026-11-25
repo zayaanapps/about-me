@@ -15,6 +15,7 @@ import { ExploringSection } from './components/ExploringSection';
 import { GallerySection } from './components/GallerySection';
 import { ContactSection } from './components/ContactSection';
 import { CustomizeDrawer } from './components/CustomizeDrawer';
+import { OfflineIndicator } from './components/PWAInstallButton';
 import {
   clearSavedProfile,
   DEFAULT_PROFILE,
@@ -34,10 +35,36 @@ function getInitialTheme(): ThemeMode {
   return 'light';
 }
 
+const VALID_SHORTCUT_TABS = new Set([
+  'overview',
+  'about',
+  'education',
+  'journey',
+  'expertise',
+  'technology',
+  'projects',
+  'playground',
+  'philosophy',
+  'beyond',
+  'exploring',
+  'gallery',
+  'contact',
+]);
+
+function getInitialTab(): string {
+  if (typeof window !== 'undefined') {
+    const param = new URLSearchParams(window.location.search).get('tab');
+    if (param && VALID_SHORTCUT_TABS.has(param)) {
+      return param;
+    }
+  }
+  return 'overview';
+}
+
 export default function App() {
   const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
   const [profile, setProfile] = useState<PersonalProfile>(loadSavedProfile);
-  const [activeTab, setActiveTab] = useState<string>('overview');
+  const [activeTab, setActiveTab] = useState<string>(getInitialTab);
   const [projectFilter, setProjectFilter] = useState<ProjectFilter>('All');
   const [customizeOpen, setCustomizeOpen] = useState(false);
 
@@ -220,6 +247,8 @@ export default function App() {
           onSave={handleSaveProfile}
           onReset={handleResetProfile}
         />
+
+        <OfflineIndicator />
       </div>
     </MotionConfig>
   );
