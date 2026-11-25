@@ -83,7 +83,7 @@ export function HeroSection({
     <section
       id="hero"
       aria-label="Profile Card section"
-      className="relative flex flex-1 flex-col justify-between overflow-hidden rounded-none border-x-0 border-b-0 border-t-0 border-[#D8E6DE] bg-white px-4 py-3.5 shadow-none sm:rounded-3xl sm:border-2 sm:px-10 sm:py-8 dark:border-[#24382E] dark:bg-[#0D1411]"
+      className="relative flex flex-1 flex-col overflow-hidden rounded-none border-x-0 border-b-0 border-t-0 border-[#D8E6DE] bg-white px-4 pt-3.5 pb-2.5 shadow-none sm:rounded-3xl sm:border-2 sm:px-10 sm:pt-8 sm:pb-6 dark:border-[#24382E] dark:bg-[#0D1411]"
     >
       <div>
         {/* Canopy */}
@@ -216,14 +216,14 @@ export function HeroSection({
         </div>
       </div>
 
-      {/* Unified Border Box: 8 Homepage Menus in Bold & Same Format */}
-      <div className="mt-2.5 border-t border-[#E4ECE7] pt-2.5 sm:mt-4 sm:border-t-2 sm:pt-4 dark:border-[#24382E]">
-        <div className="rounded-2xl border-2 border-[#D8E6DE] bg-[#F4F8F5]/75 p-2 shadow-xs sm:p-3.5 dark:border-[#24382E] dark:bg-[#101814]/90">
-          <div className="grid grid-cols-2 gap-1.5 sm:gap-2.5">
+      {/* Unified Border Box: 8 Homepage Menus filling space between tags and footer */}
+      <div className="mt-2.5 flex flex-1 flex-col border-t border-[#E4ECE7] pt-2.5 sm:mt-4 sm:border-t-2 sm:pt-4 dark:border-[#24382E]">
+        <div className="flex flex-1 flex-col rounded-2xl border-2 border-[#D8E6DE] bg-[#F4F8F5]/75 p-2 shadow-xs sm:p-3.5 dark:border-[#24382E] dark:bg-[#101814]/90">
+          <div className="grid flex-1 grid-cols-2 grid-rows-4 gap-1.5 sm:gap-2.5">
             <button
               type="button"
               onClick={() => onSelectProjects('All')}
-              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+              className="flex h-full min-h-[34px] w-full items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1.5 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[42px] sm:border-2 sm:px-3 sm:py-2 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
             >
               <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
                 <FolderKanban className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
@@ -234,7 +234,7 @@ export function HeroSection({
             <button
               type="button"
               onClick={() => onSelectProjects('Android Applications')}
-              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+              className="flex h-full min-h-[34px] w-full items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1.5 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[42px] sm:border-2 sm:px-3 sm:py-2 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
             >
               <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
                 <Smartphone className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
@@ -245,7 +245,7 @@ export function HeroSection({
             <button
               type="button"
               onClick={() => onSelectProjects('Websites')}
-              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+              className="flex h-full min-h-[34px] w-full items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1.5 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[42px] sm:border-2 sm:px-3 sm:py-2 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
             >
               <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
                 <Globe className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
@@ -256,7 +256,7 @@ export function HeroSection({
             <button
               type="button"
               onClick={() => onSelectTab('education')}
-              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+              className="flex h-full min-h-[34px] w-full items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1.5 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[42px] sm:border-2 sm:px-3 sm:py-2 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
             >
               <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
                 <GraduationCap className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
@@ -267,7 +267,7 @@ export function HeroSection({
             <button
               type="button"
               onClick={() => onSelectTab('philosophy')}
-              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+              className="flex h-full min-h-[34px] w-full items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1.5 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[42px] sm:border-2 sm:px-3 sm:py-2 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
             >
               <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
                 <Compass className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
@@ -278,7 +278,7 @@ export function HeroSection({
             <button
               type="button"
               onClick={() => onSelectTab('journey')}
-              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+              className="flex h-full min-h-[34px] w-full items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1.5 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[42px] sm:border-2 sm:px-3 sm:py-2 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
             >
               <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
                 <Briefcase className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
@@ -289,7 +289,7 @@ export function HeroSection({
             <button
               type="button"
               onClick={() => onSelectTab('contact')}
-              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+              className="flex h-full min-h-[34px] w-full items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1.5 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[42px] sm:border-2 sm:px-3 sm:py-2 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
             >
               <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
                 <Mail className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
@@ -300,7 +300,7 @@ export function HeroSection({
             <button
               type="button"
               onClick={() => onSelectTab('gallery')}
-              className="inline-flex min-h-[34px] items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[40px] sm:border-2 sm:px-3 sm:py-1.5 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
+              className="flex h-full min-h-[34px] w-full items-center justify-center rounded-xl border border-[#D8E6DE] bg-white px-2.5 py-1.5 text-[11px] font-extrabold whitespace-nowrap text-[#0E1813] shadow-2xs transition-colors hover:border-emerald-700/50 hover:bg-emerald-50 cursor-pointer sm:min-h-[42px] sm:border-2 sm:px-3 sm:py-2 sm:text-xs dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-[#18261F]"
             >
               <span className="inline-flex w-[104px] items-center justify-start gap-1.5 sm:w-[116px] sm:gap-2">
                 <Image className="h-3.5 w-3.5 shrink-0 text-emerald-700 dark:text-emerald-400" />
