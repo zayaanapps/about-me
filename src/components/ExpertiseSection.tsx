@@ -18,8 +18,8 @@ export function ExpertiseSection() {
           <Layers className="h-5 w-5" />
         </div>
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-            Professional Core
+          <p className="text-[10px] font-semibold tracking-wide text-emerald-700 dark:text-emerald-400">
+            G4S Secure Solutions Bangladesh (P) Ltd. · Core Capabilities
           </p>
           <h2
             id="expertise-heading"
@@ -36,7 +36,7 @@ export function ExpertiseSection() {
             key={cat.title}
             className="rounded-2xl border-2 border-[#D8E6DE] bg-[#F4F8F5] p-5 shadow-xs transition-all hover:border-emerald-700/50 dark:border-[#24382E] dark:bg-[#121B16]"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between border-b border-[#E4ECE7] pb-3 dark:border-[#24382E]">
               <h3 className="font-display text-sm font-bold text-[#0E1813] dark:text-white">
                 {cat.title}
               </h3>

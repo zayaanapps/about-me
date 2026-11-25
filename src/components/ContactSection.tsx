@@ -93,21 +93,21 @@ export function ContactSection({ profile }: ContactSectionProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      className="rounded-3xl border border-[#E2EBE6] bg-white p-6 transition-colors duration-300 sm:p-10 dark:border-[#1D2923] dark:bg-[#101613]"
+      className="rounded-3xl border-2 border-[#D8E6DE] bg-white p-6 shadow-lg transition-colors duration-300 sm:p-10 dark:border-[#24382E] dark:bg-[#0D1411]"
     >
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-4 border-b-2 border-[#E4ECE7] pb-5 sm:flex-row sm:items-end sm:justify-between dark:border-[#24382E]">
         <div>
-          <p className="text-xs font-medium text-emerald-700 dark:text-emerald-400">
+          <p className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
             Let&apos;s Connect
           </p>
           <h2
             id="contact-heading"
-            className="font-display text-2xl font-semibold tracking-tight text-[#0E1813] sm:text-3xl dark:text-[#EFF4F1]"
+            className="mt-1 font-display text-2xl font-extrabold tracking-tight text-[#0E1813] sm:text-3xl dark:text-white"
           >
-            Get in Touch
+            Contact &amp; Personal Links
           </h2>
-          <p className="mt-1 text-sm text-[#52665C] dark:text-[#899E93]">
-            Reach out for operations inquiries, technology discussions, or collaboration opportunities in {profile.location}.
+          <p className="mt-1 text-sm font-medium text-[#4A5D53] dark:text-[#90A49A]">
+            Reach out for security operations inquiries, AI &amp; Vibe Coding discussions, or collaboration in {profile.location}.
           </p>
         </div>
 
@@ -149,7 +149,7 @@ export function ContactSection({ profile }: ContactSectionProps) {
       </div>
 
       {/* One-Click Copy Email Bar */}
-      <div className="mt-4">
+      <div className="mt-6 border-t-2 border-[#E4ECE7] pt-5 dark:border-[#24382E]">
         <button
           type="button"
           onClick={handleCopyEmail}

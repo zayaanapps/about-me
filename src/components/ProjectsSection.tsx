@@ -1,12 +1,22 @@
 import { useState, type FormEvent } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowUpRight, Code2, Plus, Trash2, X } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Code2,
+  FolderGit2,
+  Globe,
+  Plus,
+  Smartphone,
+  Trash2,
+  X,
+} from 'lucide-react';
 import type { ProjectItem } from '../data/profile';
 
 interface ProjectsSectionProps {
   projects: ProjectItem[];
   onAddProject: (project: ProjectItem) => void;
   onDeleteProject: (projectId: string) => void;
+  onNavigateContact?: () => void;
 }
 
 type ProjectFilter = 'All' | ProjectItem['category'];
@@ -25,6 +35,7 @@ export function ProjectsSection({
   projects,
   onAddProject,
   onDeleteProject,
+  onNavigateContact,
 }: ProjectsSectionProps) {
   const [activeFilter, setActiveFilter] = useState<ProjectFilter>('All');
   const [modalOpen, setModalOpen] = useState(false);
@@ -35,6 +46,8 @@ export function ProjectsSection({
   const [summary, setSummary] = useState('');
   const [stackInput, setStackInput] = useState('');
   const [url, setUrl] = useState('');
+  const [appUrl, setAppUrl] = useState('');
+  const [logoUrl, setLogoUrl] = useState('');
 
   const filteredProjects =
     activeFilter === 'All'
@@ -59,7 +72,9 @@ export function ProjectsSection({
       status,
       summary: cleanSummary,
       stack: stack.length > 0 ? stack : ['React', 'TypeScript'],
+      logoUrl: logoUrl.trim() || undefined,
       url: url.trim() || undefined,
+      appUrl: appUrl.trim() || undefined,
     };
 
     onAddProject(newProj);
@@ -67,8 +82,13 @@ export function ProjectsSection({
     setSummary('');
     setStackInput('');
     setUrl('');
+    setAppUrl('');
+    setLogoUrl('');
     setModalOpen(false);
   };
+
+  const isExternalHttpUrl = (value?: string) =>
+    Boolean(value && (value.startsWith('http://') || value.startsWith('https://')));
 
   return (
     <motion.section
@@ -89,10 +109,10 @@ export function ProjectsSection({
             id="projects-heading"
             className="mt-1 font-display text-2xl font-extrabold tracking-tight text-[#0E1813] sm:text-3xl dark:text-white"
           >
-            My Projects &amp; Creations
+            My Projects &amp; Digital Creations
           </h2>
           <p className="mt-1 text-sm font-medium text-[#4A5D53] dark:text-[#90A49A]">
-            Websites, Android apps, AI experiments, and personal ideas.
+            Websites, Android apps, AI experiments, digital tools, and personal ideas.
           </p>
         </div>
 
@@ -141,29 +161,26 @@ export function ProjectsSection({
       </div>
 
       {/* Projects Grid */}
-      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
-        {filteredProjects.map((project) => (
-          <div
-            key={project.id}
-            className="flex flex-col justify-between rounded-2xl border-2 border-[#D8E6DE] bg-[#F4F8F5] p-6 shadow-xs transition-all duration-200 hover:border-emerald-700/50 dark:border-[#24382E] dark:bg-[#121B16]"
-          >
-            <div>
-              <div className="flex items-center justify-between gap-3">
-                <span className="rounded-md bg-emerald-100 px-3 py-1 font-mono text-xs font-bold text-emerald-900 dark:bg-emerald-950/80 dark:text-emerald-300">
-                  {project.category}
-                </span>
-
-                <div className="flex items-center gap-2.5">
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-bold ${
-                      project.status === 'Completed'
-                        ? 'bg-emerald-200 text-emerald-950 dark:bg-emerald-900/60 dark:text-emerald-200'
-                        : project.status === 'In Progress'
-                          ? 'bg-amber-200 text-amber-950 dark:bg-amber-900/60 dark:text-amber-200'
-                          : 'bg-sky-200 text-sky-950 dark:bg-sky-900/60 dark:text-sky-200'
-                    }`}
-                  >
-                    {project.status}
+      {filteredProjects.length === 0 ? (
+        <div className="mt-6 border-t-2 border-[#E4ECE7] pt-6 dark:border-[#24382E]">
+          <div className="rounded-2xl border-2 border-dashed border-[#D8E6DE] bg-[#F4F8F5] p-8 text-center dark:border-[#24382E] dark:bg-[#121B16]">
+            <p className="text-sm font-semibold text-[#384A41] dark:text-[#A4B8AE]">
+              No projects in &ldquo;{activeFilter}&rdquo; yet. Use &ldquo;Add New Project&rdquo; to
+              record one anytime.
+            </p>
+          </div>
+        </div>
+      ) : (
+        <div className="mt-6 grid grid-cols-1 gap-6 border-t-2 border-[#E4ECE7] pt-6 sm:grid-cols-2 dark:border-[#24382E]">
+          {filteredProjects.map((project) => (
+            <div
+              key={project.id}
+              className="flex flex-col justify-between rounded-2xl border-2 border-[#D8E6DE] bg-[#F4F8F5] p-6 shadow-xs transition-all duration-200 hover:border-emerald-700/50 dark:border-[#24382E] dark:bg-[#121B16]"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-3 border-b border-[#E4ECE7] pb-3 dark:border-[#24382E]">
+                  <span className="font-mono text-xs font-bold text-emerald-800 dark:text-emerald-300">
+                    {project.category} · {project.status}
                   </span>
 
                   {projects.length > 1 && (
@@ -172,50 +189,108 @@ export function ProjectsSection({
                       onClick={() => onDeleteProject(project.id)}
                       aria-label="Delete project"
                       title="Delete project"
-                      className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-[#52665C] shadow-xs transition-colors hover:bg-rose-600 hover:text-white cursor-pointer dark:bg-[#1B2B22] dark:text-[#8AA095] dark:hover:bg-rose-600 dark:hover:text-white"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-[#52665C] shadow-xs transition-colors hover:bg-rose-600 hover:text-white cursor-pointer dark:bg-[#1B2B22] dark:text-[#8AA095] dark:hover:bg-rose-600 dark:hover:text-white"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   )}
                 </div>
-              </div>
 
-              <h3 className="mt-5 font-display text-lg font-bold text-[#0E1813] dark:text-white">
-                {project.title}
-              </h3>
+                {/* Optional Screenshot / Logo + Title */}
+                <div className="mt-4 flex items-center gap-3.5">
+                  {project.logoUrl ? (
+                    <img
+                      src={project.logoUrl}
+                      alt={project.title}
+                      referrerPolicy="no-referrer"
+                      className="h-12 w-12 shrink-0 rounded-xl border border-[#D8E6DE] bg-white object-cover dark:border-[#24382E] dark:bg-[#1B2B22]"
+                    />
+                  ) : (
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D8E6DE] bg-white text-emerald-700 shadow-2xs dark:border-[#24382E] dark:bg-[#1B2B22] dark:text-emerald-400">
+                      {project.category === 'Android Applications' ? (
+                        <Smartphone className="h-5 w-5" />
+                      ) : project.category === 'Websites' ? (
+                        <Globe className="h-5 w-5" />
+                      ) : (
+                        <Code2 className="h-5 w-5" />
+                      )}
+                    </div>
+                  )}
 
-              <p className="mt-3 text-sm font-medium leading-relaxed text-[#4A5D53] dark:text-[#90A49A]">
-                {project.summary}
-              </p>
-            </div>
-
-            <div className="mt-6 border-t-2 border-[#E4ECE7] pt-4 dark:border-[#24382E]">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex flex-wrap items-center gap-1.5 text-xs font-bold text-[#52665C] dark:text-[#90A49A]">
-                  {project.stack.map((tech, idx) => (
-                    <span key={tech} className="inline-flex items-center gap-1.5">
-                      {idx > 0 && <span>·</span>}
-                      <span>{tech}</span>
-                    </span>
-                  ))}
+                  <h3 className="font-display text-lg font-bold text-[#0E1813] dark:text-white">
+                    {project.title}
+                  </h3>
                 </div>
 
-                {project.url && (
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 transition-colors hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300"
-                  >
-                    <span>View Project</span>
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                )}
+                <p className="mt-3 text-sm font-medium leading-relaxed text-[#4A5D53] dark:text-[#90A49A]">
+                  {project.summary}
+                </p>
+              </div>
+
+              <div className="mt-6 border-t-2 border-[#E4ECE7] pt-4 dark:border-[#24382E]">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs font-bold text-[#52665C] dark:text-[#90A49A]">
+                    {project.stack.map((tech, idx) => (
+                      <span key={tech} className="inline-flex items-center gap-1.5">
+                        {idx > 0 && <span aria-hidden="true">·</span>}
+                        <span>{tech}</span>
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3">
+                    {project.url &&
+                      (isExternalHttpUrl(project.url) ? (
+                        <a
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 transition-colors hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300"
+                        >
+                          <span>Website</span>
+                          <ArrowUpRight className="h-3.5 w-3.5" />
+                        </a>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={onNavigateContact}
+                          className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 transition-colors hover:text-emerald-800 cursor-pointer dark:text-emerald-400 dark:hover:text-emerald-300"
+                        >
+                          <span>Ask About Project</span>
+                          <ArrowUpRight className="h-3.5 w-3.5" />
+                        </button>
+                      ))}
+
+                    {isExternalHttpUrl(project.appUrl) && (
+                      <a
+                        href={project.appUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 transition-colors hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300"
+                      >
+                        <Smartphone className="h-3.5 w-3.5" />
+                        <span>App</span>
+                      </a>
+                    )}
+
+                    {isExternalHttpUrl(project.sourceUrl) && (
+                      <a
+                        href={project.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-[#3E5147] transition-colors hover:text-emerald-700 dark:text-[#A4B8AE] dark:hover:text-emerald-300"
+                      >
+                        <FolderGit2 className="h-3.5 w-3.5" />
+                        <span>Code</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* Add Project Modal */}
       <AnimatePresence>
@@ -241,7 +316,7 @@ export function ProjectsSection({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 10 }}
               transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-10 w-full max-w-lg overflow-hidden rounded-3xl border-2 border-[#D8E6DE] bg-white p-6 shadow-2xl sm:p-8 dark:border-[#24382E] dark:bg-[#0D1411]"
+              className="relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-3xl border-2 border-[#D8E6DE] bg-white p-6 shadow-2xl sm:p-8 dark:border-[#24382E] dark:bg-[#0D1411]"
             >
               <div className="flex items-center justify-between border-b-2 border-[#E4ECE7] pb-4 dark:border-[#24382E]">
                 <h3
@@ -298,7 +373,9 @@ export function ProjectsSection({
                       <option value="Websites">Websites</option>
                       <option value="Android Applications">Android Applications</option>
                       <option value="AI Experiments">AI Experiments</option>
-                      <option value="Automation & Digital Tools">Automation &amp; Digital Tools</option>
+                      <option value="Automation & Digital Tools">
+                        Automation &amp; Digital Tools
+                      </option>
                       <option value="Personal Projects">Personal Projects</option>
                       <option value="Future Ideas">Future Ideas</option>
                     </select>
@@ -348,7 +425,7 @@ export function ProjectsSection({
                       htmlFor="proj-stack"
                       className="block text-xs font-bold text-[#384A41] dark:text-[#A4B8AE]"
                     >
-                      Tech Stack (comma separated)
+                      Tools / Tech (comma separated)
                     </label>
                     <input
                       id="proj-stack"
@@ -362,16 +439,52 @@ export function ProjectsSection({
 
                   <div>
                     <label
+                      htmlFor="proj-logo"
+                      className="block text-xs font-bold text-[#384A41] dark:text-[#A4B8AE]"
+                    >
+                      Logo / Screenshot URL (optional)
+                    </label>
+                    <input
+                      id="proj-logo"
+                      type="url"
+                      value={logoUrl}
+                      onChange={(e) => setLogoUrl(e.target.value)}
+                      placeholder="https://..."
+                      className="mt-1.5 min-h-[46px] w-full rounded-xl border-2 border-[#D8E6DE] bg-white px-4 py-2.5 text-sm font-medium text-[#0E1813] placeholder:text-[#7E9288] focus:border-emerald-700 focus:outline-none dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:placeholder:text-[#5C7166] dark:focus:border-emerald-400"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label
                       htmlFor="proj-url"
                       className="block text-xs font-bold text-[#384A41] dark:text-[#A4B8AE]"
                     >
-                      Project URL (optional)
+                      Website Link (optional)
                     </label>
                     <input
                       id="proj-url"
                       type="url"
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
+                      placeholder="https://..."
+                      className="mt-1.5 min-h-[46px] w-full rounded-xl border-2 border-[#D8E6DE] bg-white px-4 py-2.5 text-sm font-medium text-[#0E1813] placeholder:text-[#7E9288] focus:border-emerald-700 focus:outline-none dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:placeholder:text-[#5C7166] dark:focus:border-emerald-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="proj-app-url"
+                      className="block text-xs font-bold text-[#384A41] dark:text-[#A4B8AE]"
+                    >
+                      App Link (optional)
+                    </label>
+                    <input
+                      id="proj-app-url"
+                      type="url"
+                      value={appUrl}
+                      onChange={(e) => setAppUrl(e.target.value)}
                       placeholder="https://..."
                       className="mt-1.5 min-h-[46px] w-full rounded-xl border-2 border-[#D8E6DE] bg-white px-4 py-2.5 text-sm font-medium text-[#0E1813] placeholder:text-[#7E9288] focus:border-emerald-700 focus:outline-none dark:border-[#24382E] dark:bg-[#121B16] dark:text-white dark:placeholder:text-[#5C7166] dark:focus:border-emerald-400"
                     />

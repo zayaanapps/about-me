@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MoreVertical, Moon, SlidersHorizontal, Sun, X } from 'lucide-react';
+import { MoreVertical, Moon, SlidersHorizontal, Sun } from 'lucide-react';
+import { DEFAULT_PORTRAIT_SRC } from '../data/profile';
 
 interface NavbarProps {
   name: string;
+  avatarDataUrl: string | null;
   theme: 'light' | 'dark';
   activeTab: string;
   onSelectTab: (tabId: string) => void;
@@ -14,11 +16,12 @@ interface NavbarProps {
 const TABS = [
   { id: 'overview', label: 'Overview & Hero' },
   { id: 'about', label: 'About Me' },
-  { id: 'journey', label: 'Journey' },
+  { id: 'education', label: 'Education' },
+  { id: 'journey', label: 'Professional Identity' },
   { id: 'expertise', label: 'Expertise' },
   { id: 'technology', label: 'Technology' },
   { id: 'projects', label: 'Projects' },
-  { id: 'playground', label: 'Playground' },
+  { id: 'playground', label: 'Vibe Coding & AI' },
   { id: 'philosophy', label: 'Philosophy' },
   { id: 'beyond', label: 'Beyond Work' },
   { id: 'exploring', label: 'Exploring' },
@@ -28,6 +31,7 @@ const TABS = [
 
 export function Navbar({
   name,
+  avatarDataUrl,
   theme,
   activeTab,
   onSelectTab,
@@ -35,7 +39,9 @@ export function Navbar({
   onOpenCustomize,
 }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [avatarFailed, setAvatarFailed] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const avatarSrc = avatarDataUrl || DEFAULT_PORTRAIT_SRC;
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -55,17 +61,34 @@ export function Navbar({
 
   return (
     <header className="sticky top-0 z-40 border-b-2 border-[#D8E6DE] bg-[#F7FAF8]/90 backdrop-blur-md transition-colors duration-300 dark:border-[#24382E] dark:bg-[#080C0A]/90">
-      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between gap-4 px-4 sm:px-8">
+      <div className="mx-auto flex h-[50px] max-w-5xl items-center justify-between gap-4 px-4 sm:h-[58px] sm:px-8">
         {/* Brand / Active Section indicator */}
-        <div className="flex items-center gap-3 min-w-0">
+        <div className="flex items-center gap-2.5 min-w-0">
           <a
             href="#top"
             onClick={() => onSelectTab('overview')}
-            className="font-display text-base font-extrabold tracking-tight text-[#0E1813] transition-colors hover:text-emerald-700 whitespace-nowrap shrink-0 dark:text-white dark:hover:text-emerald-400"
+            className="inline-flex items-center gap-2 font-display text-lg font-bold italic tracking-tight text-[#0E1813] transition-colors hover:text-emerald-700 whitespace-nowrap shrink-0 dark:text-white dark:hover:text-emerald-400"
           >
-            {name}
+            <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-[#D8E6DE] bg-[#E2EFE8] ring-1 ring-emerald-700/25 sm:h-8 sm:w-8 dark:border-[#24382E] dark:bg-[#122019]">
+              {!avatarFailed ? (
+                <img
+                  src={avatarSrc}
+                  alt={name}
+                  referrerPolicy="no-referrer"
+                  onError={() => setAvatarFailed(true)}
+                  className="h-full w-full object-cover object-center"
+                />
+              ) : (
+                <span className="font-display text-[10px] font-bold not-italic text-emerald-900 dark:text-emerald-200">
+                  AK
+                </span>
+              )}
+            </span>
+            <span className="inline-block origin-left scale-x-110 font-name text-[20px] font-normal not-italic leading-none tracking-normal sm:mr-3.5 sm:text-[22px]">
+              {name}
+            </span>
           </a>
-          <span className="hidden text-xs font-bold text-emerald-700 sm:inline dark:text-emerald-400">
+          <span className="hidden font-mono text-[11px] font-medium tracking-wide text-emerald-700 sm:inline dark:text-emerald-400">
             / {activeLabel}
           </span>
         </div>
@@ -76,7 +99,7 @@ export function Navbar({
             type="button"
             onClick={onToggleTheme}
             aria-label="Toggle theme"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-xl border-2 border-[#D8E6DE] bg-white text-[#0E1813] shadow-xs transition-colors hover:border-emerald-700/50 cursor-pointer dark:border-[#24382E] dark:bg-[#121B16] dark:text-white"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-xl border-2 border-[#D8E6DE] bg-white text-[#647A6F] shadow-xs transition-colors hover:border-emerald-700/50 hover:text-[#3E5147] cursor-pointer dark:border-[#24382E] dark:bg-[#121B16] dark:text-[#DCEAE2] dark:hover:text-white"
           >
             {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>

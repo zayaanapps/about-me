@@ -49,9 +49,9 @@ export function GallerySection({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      className="rounded-3xl border border-[#E2EBE6] bg-white p-6 transition-colors duration-300 sm:p-10 dark:border-[#1D2923] dark:bg-[#101613]"
+      className="rounded-3xl border-2 border-[#D8E6DE] bg-white p-6 shadow-lg transition-colors duration-300 sm:p-10 dark:border-[#24382E] dark:bg-[#0D1411]"
     >
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-4 border-b-2 border-[#E4ECE7] pb-5 sm:flex-row sm:items-end sm:justify-between dark:border-[#24382E]">
         <div>
           <p className="text-xs font-medium text-emerald-700 dark:text-emerald-400">
             Personal Moments &amp; Gallery
@@ -88,15 +88,18 @@ export function GallerySection({
               type="button"
               onClick={() => setActivePhoto(photo)}
               aria-label={`View ${photo.title} in lightbox`}
-              className="relative aspect-[4/3] w-full overflow-hidden cursor-zoom-in"
+              className="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-[#064E3B] via-[#047857] to-[#0D1411] cursor-zoom-in"
             >
               <img
                 src={photo.url}
                 alt={photo.title}
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  e.currentTarget.style.opacity = '0';
+                }}
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-85 transition-opacity group-hover:opacity-90" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent opacity-85 transition-opacity group-hover:opacity-90" />
 
               <div className="absolute bottom-4 left-4 right-4 text-left text-white">
                 <span className="rounded-md bg-white/20 px-2 py-0.5 font-mono text-[10px] font-medium backdrop-blur-xs">

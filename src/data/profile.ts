@@ -15,14 +15,44 @@ export interface TechInterest {
   description: string;
 }
 
+export interface IdentityPillar {
+  id: 'scholar' | 'professional' | 'creator';
+  title: string;
+  subtitle: string;
+  summary: string;
+}
+
+export interface AcademicDegree {
+  degree: string;
+  field: string;
+  institution: string;
+  location: string;
+  focus: string;
+}
+
+export interface PhilosophyItem {
+  quote: string;
+  theme: string;
+  reflection: string;
+  highlight: boolean;
+}
+
 export interface ProjectItem {
   id: string;
   title: string;
-  category: 'Websites' | 'Android Applications' | 'AI Experiments' | 'Automation & Digital Tools' | 'Personal Projects' | 'Future Ideas';
+  category:
+    | 'Websites'
+    | 'Android Applications'
+    | 'AI Experiments'
+    | 'Automation & Digital Tools'
+    | 'Personal Projects'
+    | 'Future Ideas';
   status: 'Completed' | 'In Progress' | 'Experiment';
   summary: string;
   stack: string[];
+  logoUrl?: string;
   url?: string;
+  appUrl?: string;
   sourceUrl?: string;
 }
 
@@ -59,12 +89,23 @@ export const STORAGE_KEY = 'kuafi-complete-personal-portfolio-v1';
 export const DEFAULT_PORTRAIT_SRC = '/assets/portrait.jpg';
 export const DEFAULT_SKETCH_SRC = '/assets/portrait-sketch.jpg';
 
+const LEGACY_TAGLINE =
+  'Professional by Experience. Curious by Nature. A Builder by Passion.';
+const LEGACY_TAGLINE_V2 =
+  'English Postgraduate. Security Professional. AI Vibe Coder.';
+const LEGACY_INTRODUCTION =
+  "I'm a professional in operations and management with a passion for technology, digital innovation, and building practical solutions. I enjoy exploring new ideas, learning continuously, and turning concepts into something useful.";
+const LEGACY_INTRODUCTION_V2 =
+  'An English graduate and postgraduate from Government Titumir College, Dhaka, working as a Security Professional at G4S Secure Solutions Bangladesh—and a curious Vibe Coder collaborating with AI to turn everyday ideas into websites, Android apps, and practical digital tools.';
+const LEGACY_INTRODUCTION_V3 =
+  'An English graduate and postgraduate from Govt. Titumir College, Dhaka, working as a Security Professional at G4S Secure Solutions Bangladesh (P) Ltd.—and a curious Vibe Coder collaborating with AI to build websites, Android apps, and practical digital tools.';
+
 export const DEFAULT_PROFILE: PersonalProfile = {
   name: 'Abdullahil Kuafi',
-  tagline: 'Professional by Experience. Curious by Nature. A Builder by Passion.',
+  tagline: 'English Postgraduate. Security Professional. Artificial Intelligence Vibe Coder.',
   introduction:
-    "I'm a professional in operations and management with a passion for technology, digital innovation, and building practical solutions. I enjoy exploring new ideas, learning continuously, and turning concepts into something useful.",
-  location: 'Bangladesh',
+    'An English graduate and postgraduate from Govt. Titumir College, Dhaka, working as a Security Professional at G4S Secure Solutions Bangladesh (P) Ltd.—and a curious Vibe Coder collaborating with Artificial Intelligence to build websites, Android apps, and practical digital tools.',
+  location: 'Dhaka, Bangladesh',
   email: 'themadkafi@gmail.com',
   avatarDataUrl: null,
   socials: {
@@ -76,12 +117,12 @@ export const DEFAULT_PROFILE: PersonalProfile = {
     website: '',
   },
   currentlyExploring: [
-    'AI and AI-assisted development tools',
-    'New web development frameworks and patterns',
-    'Android application development and UI ergonomics',
-    'Automation and daily workflow productivity',
-    'Firebase cloud architecture and real-time sync',
-    'Ideas for future digital tools and mobile apps',
+    'AI-assisted software creation & Vibe Coding workflows',
+    'Google Ecosystem tools across Android, Firebase & Gemini',
+    'Modern web applications & responsive interfaces',
+    'Android application development and mobile UI ergonomics',
+    'AI-powered productivity & digital management tools',
+    'Turning everyday operational ideas into usable prototypes',
   ],
   projects: [
     {
@@ -151,169 +192,294 @@ export const DEFAULT_PROFILE: PersonalProfile = {
   ],
 };
 
+export const IDENTITY_PILLARS: IdentityPillar[] = [
+  {
+    id: 'scholar',
+    title: 'The Scholar',
+    subtitle: 'B.A. & M.A. in English · Govt. Titumir College, Dhaka (Affiliated with Dhaka University)',
+    summary:
+      'Grounded in language, interpretation, critical thinking, and clear human communication.',
+  },
+  {
+    id: 'professional',
+    title: 'The Security Professional',
+    subtitle: 'Operations Officer, Cumilla Branch · G4S Secure Solutions Bangladesh (P) Ltd.',
+    summary:
+      'Shaped by operational coordination, client trust, team supervision, and calm problem-solving.',
+  },
+  {
+    id: 'creator',
+    title: 'The Digital Creator',
+    subtitle: 'Vibe Coder · AI & App Explorer',
+    summary:
+      'Collaborating with AI through logic, creativity, and persistence to build websites, apps, and tools.',
+  },
+];
+
+export const ACADEMIC_DEGREES: AcademicDegree[] = [
+  {
+    degree: 'Master of Arts (M.A.) in English',
+    field: 'Postgraduate Studies in English',
+    institution: 'Govt. Titumir College, Dhaka',
+    location: 'Affiliated with Dhaka University',
+    focus:
+      'Deepened analytical reading, critical interpretation, structured argumentation, and thoughtful written expression.',
+  },
+  {
+    degree: 'Bachelor of Arts (B.A.) in English',
+    field: 'Undergraduate Studies in English',
+    institution: 'Govt. Titumir College, Dhaka',
+    location: 'Affiliated with Dhaka University',
+    focus:
+      'Built a strong foundation in language precision, comprehension of complex ideas, and clear communication.',
+  },
+];
+
+export const ACADEMIC_STRENGTHS = [
+  {
+    title: 'Clear Communication',
+    description:
+      'Expressing ideas, operational updates, and project goals with precision and empathy across teams and clients.',
+  },
+  {
+    title: 'Analytical & Critical Thinking',
+    description:
+      'Reading between the lines, questioning assumptions, and breaking down multifaceted situations logically.',
+  },
+  {
+    title: 'Interpretation of Ideas',
+    description:
+      'Understanding nuance in human language—an unexpected superpower when designing interfaces and prompting AI.',
+  },
+  {
+    title: 'Structured Expression',
+    description:
+      'Turning scattered thoughts into clear documentation, coherent reports, and well-defined digital workflows.',
+  },
+];
+
 export const PROFESSIONAL_RESPONSIBILITIES = [
   {
-    title: 'Operations Management & Coordination',
-    description: 'Directing daily service operations, resource scheduling, and site coordination with precision.',
+    title: 'Security Management & Operations',
+    description:
+      'Overseeing daily security operations, service readiness, and site standards with disciplined accountability.',
   },
   {
-    title: 'Security Services Management',
-    description: 'Maintaining rigorous security protocols, risk oversight, and compliance across operational sites.',
+    title: 'Operational Coordination',
+    description:
+      'Aligning shift schedules, operational handovers, and day-to-day workflows so teams operate seamlessly.',
   },
   {
-    title: 'Client Relationship Management',
-    description: 'Building trusted partnerships, handling client inquiries, and aligning service delivery with expectations.',
+    title: 'Client Management',
+    description:
+      'Maintaining dependable client communication, listening carefully to needs, and ensuring service expectations are met.',
   },
   {
-    title: 'Workforce & Manpower Management',
-    description: 'Coordinating team schedules, deployment rosters, and staff support for smooth service execution.',
+    title: 'Supervision & Team Management',
+    description:
+      'Guiding field teams with clarity, fairness, and steady follow-through across daily operational duties.',
   },
   {
-    title: 'Site & Service Monitoring',
-    description: 'Conducting thorough service checks, quality audits, and proactive site inspections.',
+    title: 'Team Communication',
+    description:
+      'Building clear dialogue and mutual accountability between management, supervisors, and on-ground personnel.',
   },
   {
-    title: 'Reporting & Documentation',
-    description: 'Preparing detailed operational logs, incident records, and status documentation.',
+    title: 'Documentation & Reporting',
+    description:
+      'Preparing accurate operational reports, routine logs, and structured administrative documentation.',
   },
   {
-    title: 'Administrative Management',
-    description: 'Overseeing routine administrative workflows, correspondence, and record organization.',
+    title: 'Practical Problem-Solving',
+    description:
+      'Evaluating real-world operational challenges calmly and implementing workable, timely solutions.',
   },
   {
-    title: 'Operational Planning',
-    description: 'Formulating practical contingency plans, schedules, and step-by-step execution guides.',
+    title: 'Discipline & Adaptability',
+    description:
+      'Balancing structured professional standards with the flexibility to respond effectively to changing situations.',
   },
   {
-    title: 'Resource & Inventory Coordination',
-    description: 'Tracking equipment allocation, inventory readiness, and supply distribution.',
-  },
-  {
-    title: 'Problem-Solving & Decision-Making',
-    description: 'Evaluating on-ground challenges calmly and implementing effective corrective actions.',
-  },
-  {
-    title: 'Team Coordination & Communication',
-    description: 'Fostering clear dialogue, mutual responsibility, and dependable collaboration across teams.',
-  },
-  {
-    title: 'Maintaining Service Standards',
-    description: 'Upholding strict professionalism, accountability, and consistent quality benchmarks.',
+    title: 'Service Quality & Compliance',
+    description:
+      'Upholding professional ethics, site protocols, and consistent service benchmarks every day.',
   },
 ];
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    title: 'Operations & Management',
+    title: 'Security & Operations',
     skills: [
+      'Security Management & Operations',
       'Operational Coordination',
-      'Workforce Management',
-      'Service Delivery',
-      'Operational Planning',
-      'Team Coordination',
+      'Supervision & Team Management',
+      'Service Quality & Readiness',
     ],
   },
   {
     title: 'Client & Communication',
     skills: [
-      'Client Relationship Management',
-      'Professional Communication',
-      'Issue Resolution',
-      'Coordination & Follow-up',
+      'Client Management & Follow-up',
+      'Team Communication',
+      'Clear Written & Verbal Expression',
+      'Constructive Issue Resolution',
     ],
   },
   {
-    title: 'Administration',
+    title: 'Reporting & Administration',
     skills: [
-      'Reporting & Documentation',
-      'Administrative Management',
-      'Resource Coordination',
-      'Record Management',
+      'Documentation & Reporting',
+      'Operational Planning',
+      'Structured Record Management',
+      'Process Organization',
     ],
   },
   {
-    title: 'Problem-Solving',
+    title: 'Problem-Solving & Mindset',
     skills: [
-      'Practical Decision-Making',
-      'Process Improvement',
-      'Critical Thinking',
-      'Managing Multiple Responsibilities',
+      'Practical Problem-Solving',
+      'Discipline & Adaptability',
+      'Critical & Analytical Thinking',
+      'Calm Decision-Making',
     ],
+  },
+];
+
+export const VIBE_CODING_AREAS = [
+  {
+    title: 'Websites',
+    description: 'Clean, responsive personal and business websites designed for speed and clarity.',
+  },
+  {
+    title: 'Android Applications',
+    description: 'Practical mobile tools tailored for everyday ergonomics on Android devices.',
+  },
+  {
+    title: 'Web Applications',
+    description: 'Interactive browser apps with real-time state, cloud sync, and offline support.',
+  },
+  {
+    title: 'AI-Powered Tools',
+    description: 'Smart assistants and workflows built by pairing human intent with modern AI models.',
+  },
+  {
+    title: 'Digital Management Systems',
+    description: 'Structured record-keeping, billing, and operational dashboards for real needs.',
+  },
+  {
+    title: 'Productivity Tools',
+    description: 'Distraction-free helpers that simplify repetitive daily work and personal planning.',
+  },
+  {
+    title: 'Creative Tech Experiments',
+    description: 'Hands-on prototypes exploring what becomes possible when curiosity meets persistence.',
   },
 ];
 
 export const TECH_INTERESTS: TechInterest[] = [
   {
-    name: 'Artificial Intelligence',
+    name: 'Vibe Coding & AI Collaboration',
     category: 'Innovation',
-    description: 'Exploring machine intelligence models, intelligent assistants, and prompt engineering.',
+    description:
+      'Using AI as a creative and technical partner to iterate from raw concepts into working software.',
   },
   {
-    name: 'AI-Powered Development',
-    category: 'Engineering',
-    description: 'Leveraging AI tools to accelerate prototyping, test ideas, and write clean code.',
+    name: 'Artificial Intelligence Tools',
+    category: 'Innovation',
+    description:
+      'Exploring intelligent assistants, prompt architecture, and practical AI-assisted problem-solving.',
   },
   {
-    name: 'Website Development',
+    name: 'Website & Web App Development',
     category: 'Web',
-    description: 'Building modern responsive web interfaces with React, TypeScript, and Tailwind CSS.',
+    description:
+      'Building modern, responsive interfaces and interactive web applications with React, TypeScript, and Tailwind CSS.',
   },
   {
     name: 'Android Applications',
     category: 'Mobile',
-    description: 'Crafting intuitive mobile experiences using Kotlin and Jetpack Compose.',
+    description:
+      'Crafting tactile mobile experiences and everyday utility companions with Kotlin and Jetpack Compose.',
   },
   {
-    name: 'Automation',
+    name: 'Digital Management Systems',
     category: 'Productivity',
-    description: 'Eliminating repetitive daily chores through smart scripts and workflow triggers.',
+    description:
+      'Designing practical accounting, inventory, and workflow systems that simplify daily business tasks.',
   },
   {
-    name: 'Digital Tools & Productivity',
-    category: 'Utility',
-    description: 'Testing software that enhances focus, organization, and personal efficiency.',
+    name: 'Automation & Productivity Tools',
+    category: 'Productivity',
+    description:
+      'Reducing friction in routine work through structured digital tools and smart automation.',
   },
   {
-    name: 'Firebase & Cloud Technologies',
+    name: 'Google Ecosystem & Platforms',
     category: 'Cloud',
-    description: 'Implementing real-time Firestore sync, secure authentication, and cloud storage.',
+    description:
+      'Practical familiarity across Android, Firebase (Firestore & Auth), Gemini AI, and Google Workspace productivity workflows.',
   },
   {
-    name: 'GitHub & Version Control',
-    category: 'DevOps',
-    description: 'Managing source code history, branches, and collaborative version tracking.',
+    name: 'Firebase & Cloud Architecture',
+    category: 'Cloud',
+    description:
+      'Implementing real-time Firestore sync, authentication, and reliable cloud data workflows.',
   },
   {
-    name: 'Modern Web Technologies',
-    category: 'Ecosystem',
-    description: 'Staying current with fast edge hosting, client-side routing, and responsive design standards.',
+    name: 'GitHub & Edge Deployment',
+    category: 'Web',
+    description:
+      'Managing clean version history with GitHub and shipping fast static web apps globally.',
   },
   {
-    name: 'Exploring New Platforms',
-    category: 'Curiosity',
-    description: 'Testing experimental software platforms, developer previews, and emerging tech stacks.',
+    name: 'Creative Technology Experiments',
+    category: 'Innovation',
+    description:
+      'Testing emerging platforms, developer previews, and new ways to bring ideas to life.',
   },
 ];
 
-export const PHILOSOPHY_QUOTES = [
+export const PHILOSOPHY_QUOTES: PhilosophyItem[] = [
   {
-    quote: 'Learn continuously. Think practically. Build meaningfully.',
-    author: 'Abdullahil Kuafi',
+    quote: 'Learning should never stop—curiosity is more valuable than knowing everything.',
+    theme: 'Lifelong Learning',
+    reflection:
+      'From studying English literature to coordinating security operations and building apps with AI, every chapter begins with the willingness to be a beginner again.',
     highlight: true,
   },
   {
-    quote: 'Always keep learning. Stay curious. Keep things simple.',
-    author: 'Core Mindset',
+    quote: 'Ideas are valuable, but execution is what gives them meaning.',
+    theme: 'Action Over Theory',
+    reflection:
+      'A small, working solution built with persistence matters far more than a grand concept that stays only in your head.',
     highlight: false,
   },
   {
-    quote: 'Solve real problems. Be responsible for what you do.',
-    author: 'Professional Ethics',
+    quote: 'Technology should exist to make real life simpler and easier.',
+    theme: 'Human-Centered Tech',
+    reflection:
+      'Complexity for its own sake impresses nobody; the best digital tools quietly remove friction from everyday work.',
     highlight: false,
   },
   {
-    quote: 'Focus on usefulness, not just appearance. Turn ideas into action.',
-    author: 'Execution Principle',
+    quote: "You don't need to know everything before you begin building.",
+    theme: 'Start Where You Are',
+    reflection:
+      'Clarity arrives through doing. Begin with a clear question, stay patient, and learn each missing piece along the way.',
+    highlight: false,
+  },
+  {
+    quote: 'Real progress comes from exploring, experimenting, failing thoughtfully, and improving.',
+    theme: 'Iterative Growth',
+    reflection:
+      'Every bug, false start, and revision teaches something no textbook ever could.',
+    highlight: false,
+  },
+  {
+    quote: 'Professional discipline and creative curiosity can—and should—coexist.',
+    theme: 'Balanced Identity',
+    reflection:
+      'Operational structure keeps my feet on the ground, while creative experimentation keeps my mind moving forward.',
     highlight: false,
   },
 ];
@@ -327,6 +493,23 @@ export function loadSavedProfile(): PersonalProfile {
     return {
       ...DEFAULT_PROFILE,
       ...parsed,
+      tagline:
+        !parsed.tagline ||
+        parsed.tagline === LEGACY_TAGLINE ||
+        parsed.tagline === LEGACY_TAGLINE_V2
+          ? DEFAULT_PROFILE.tagline
+          : parsed.tagline,
+      introduction:
+        !parsed.introduction ||
+        parsed.introduction === LEGACY_INTRODUCTION ||
+        parsed.introduction === LEGACY_INTRODUCTION_V2 ||
+        parsed.introduction === LEGACY_INTRODUCTION_V3
+          ? DEFAULT_PROFILE.introduction
+          : parsed.introduction,
+      location:
+        !parsed.location || parsed.location === 'Bangladesh'
+          ? DEFAULT_PROFILE.location
+          : parsed.location,
       socials: {
         ...DEFAULT_PROFILE.socials,
         ...(parsed.socials ?? {}),

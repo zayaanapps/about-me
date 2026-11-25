@@ -80,14 +80,14 @@ export function TechnologySection() {
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-6 grid grid-cols-1 gap-4 border-t-2 border-[#E4ECE7] pt-6 sm:grid-cols-2 lg:grid-cols-3 dark:border-[#24382E]">
         {filteredTech.map((item) => (
           <div
             key={item.name}
             className="flex flex-col justify-between rounded-2xl border-2 border-[#D8E6DE] bg-[#F4F8F5] p-5 shadow-xs transition-all hover:border-emerald-700/50 dark:border-[#24382E] dark:bg-[#121B16]"
           >
             <div>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between border-b border-[#E4ECE7] pb-3 dark:border-[#24382E]">
                 <span className="rounded-md bg-emerald-100 px-2.5 py-1 font-mono text-[10px] font-bold text-emerald-900 dark:bg-emerald-950/80 dark:text-emerald-300">
                   {item.category}
                 </span>
@@ -104,7 +104,7 @@ export function TechnologySection() {
                 </div>
               </div>
 
-              <h3 className="mt-4 font-display text-sm font-bold text-[#0E1813] dark:text-white">
+              <h3 className="mt-3.5 font-display text-sm font-bold text-[#0E1813] dark:text-white">
                 {item.name}
               </h3>
               <p className="mt-2 text-xs font-medium leading-relaxed text-[#4A5D53] dark:text-[#90A49A]">
