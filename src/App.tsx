@@ -194,9 +194,9 @@ export default function App() {
         </main>
 
         {/* Sticky Minimal Footer across all pages */}
-        <footer className="sticky bottom-0 z-30 w-full border-t-2 border-[#D8E6DE] bg-white/95 backdrop-blur-md transition-colors duration-300 sm:bg-[#F7FAF8]/90 dark:border-[#24382E] dark:bg-[#0D1411]/95 sm:dark:bg-[#080C0A]/90">
+        <footer className="sticky bottom-0 z-30 w-full border-t-2 border-[#BBD1C5] bg-[#F2F7F4]/95 backdrop-blur-md transition-colors duration-300 dark:border-[#2C4438] dark:bg-[#0D1511]/95">
           <div className="mx-auto flex h-[50px] max-w-5xl items-center justify-center px-4 sm:h-[56px] sm:px-8">
-            <p className="text-center font-mono text-[11px] font-medium text-[#3E5147] sm:text-xs dark:text-[#9BB0A5]">
+            <p className="text-center font-mono text-xs font-bold tracking-tight text-[#0E1813] sm:text-[13px] dark:text-white">
               ©{' '}
               <a
                 href="https://abdullahilkuafi.pages.dev"
@@ -206,7 +206,7 @@ export default function App() {
               >
                 Abdullahil Kuafi
               </a>{' '}
-              <span className="text-[9.5px] text-[#60746A] sm:text-[10.5px] dark:text-[#7E9288]">
+              <span className="text-[9.5px] font-semibold text-[#384A41] sm:text-[10.5px] dark:text-[#A4B8AE]">
                 | All Rights Reserved
               </span>
             </p>
