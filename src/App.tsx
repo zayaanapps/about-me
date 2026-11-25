@@ -195,7 +195,7 @@ export default function App() {
 
         {/* Sticky Minimal Footer across all pages */}
         <footer className="sticky bottom-0 z-30 w-full border-t-2 border-[#D8E6DE] bg-white/95 backdrop-blur-md transition-colors duration-300 sm:bg-[#F7FAF8]/90 dark:border-[#24382E] dark:bg-[#0D1411]/95 sm:dark:bg-[#080C0A]/90">
-          <div className="mx-auto flex max-w-5xl items-center justify-center px-4 py-2.5 sm:px-8 sm:py-3">
+          <div className="mx-auto flex h-[50px] max-w-5xl items-center justify-center px-4 sm:h-[56px] sm:px-8">
             <p className="text-center font-mono text-[11px] font-medium text-[#3E5147] sm:text-xs dark:text-[#9BB0A5]">
               ©{' '}
               <a
