@@ -146,7 +146,7 @@ export function OfflineIndicator() {
   if (isOnline) return null;
 
   return (
-    <div className="fixed bottom-14 left-4 z-40 flex items-center gap-2 rounded-xl border border-amber-400/50 bg-amber-500 px-3 py-1.5 text-xs font-bold text-white shadow-lg">
+    <div className="fixed bottom-[calc(3.75rem+env(safe-area-inset-bottom))] left-4 z-40 flex items-center gap-2 rounded-xl border border-amber-400/50 bg-amber-500 px-3 py-1.5 text-xs font-bold text-white shadow-lg">
       <span className="h-2 w-2 rounded-full bg-white animate-pulse" />
       <span>Offline Mode — Cached view active</span>
     </div>

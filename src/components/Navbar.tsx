@@ -14,7 +14,7 @@ interface NavbarProps {
   onOpenCustomize: () => void;
 }
 
-const TABS = [
+export const TABS = [
   { id: 'overview', label: 'Overview & Hero' },
   { id: 'about', label: 'About Me' },
   { id: 'education', label: 'Education' },
@@ -61,8 +61,8 @@ export function Navbar({
   const activeLabel = TABS.find((t) => t.id === activeTab)?.label ?? 'Overview';
 
   return (
-    <header className="sticky top-0 z-40 border-b-2 border-[#D8E6DE] bg-[#F7FAF8]/90 backdrop-blur-md transition-colors duration-300 dark:border-[#24382E] dark:bg-[#080C0A]/90">
-      <div className="mx-auto flex h-[50px] max-w-5xl items-center justify-between gap-4 px-4 sm:h-[58px] sm:px-8">
+    <header className="sticky top-0 z-40 border-b-2 border-[#D8E6DE] bg-[#F7FAF8]/90 pt-[env(safe-area-inset-top)] backdrop-blur-md transition-colors duration-300 dark:border-[#24382E] dark:bg-[#080C0A]/90">
+      <div className="mx-auto flex h-[50px] max-w-5xl items-center justify-between gap-4 px-4 sm:h-[58px] sm:px-8 lg:max-w-6xl xl:max-w-7xl">
         {/* Brand / Active Section indicator */}
         <div className="flex items-center gap-2.5 min-w-0">
           <a

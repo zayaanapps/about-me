@@ -85,27 +85,29 @@ export function HeroSection({
       aria-label="Profile Card section"
       className="relative flex flex-1 flex-col overflow-hidden rounded-none border-x-0 border-b-0 border-t-0 border-[#D8E6DE] bg-white px-4 pt-3.5 pb-2.5 shadow-none sm:rounded-3xl sm:border-2 sm:px-10 sm:pt-8 sm:pb-6 dark:border-[#24382E] dark:bg-[#0D1411]"
     >
-      <div>
-        {/* Canopy */}
-        <div className="relative -mx-4 -mt-3.5 h-24 w-[calc(100%+2rem)] overflow-hidden bg-gradient-to-br from-[#044E38] via-[#047857] to-[#065F46] sm:-mx-10 sm:-mt-8 sm:h-40 sm:[width:calc(100%+5rem)] dark:from-[#02241C] dark:via-[#044E38] dark:to-[#033B2B]">
-          <div className="relative flex items-center justify-between gap-2 px-4 pt-3 sm:px-10 sm:pt-5">
-            <span className="inline-flex max-w-[225px] items-center gap-1.5 rounded-full bg-black/25 px-2.5 py-1 font-mono text-[9.5px] font-semibold text-emerald-100 backdrop-blur-xs sm:max-w-none sm:px-3 sm:text-[11px]">
-              <ShieldCheck className="h-3 w-3 shrink-0" />
-              <span className="truncate">G4S Secure Solutions Bangladesh (P) Ltd.</span>
-            </span>
+      {/* Canopy */}
+      <div className="relative -mx-4 -mt-3.5 h-24 w-[calc(100%+2rem)] shrink-0 overflow-hidden bg-gradient-to-br from-[#044E38] via-[#047857] to-[#065F46] sm:-mx-10 sm:-mt-8 sm:h-40 sm:[width:calc(100%+5rem)] dark:from-[#02241C] dark:via-[#044E38] dark:to-[#033B2B]">
+        <div className="relative flex items-center justify-between gap-2 px-4 pt-3 sm:px-10 sm:pt-5">
+          <span className="inline-flex max-w-[225px] items-center gap-1.5 rounded-full bg-black/25 px-2.5 py-1 font-mono text-[9.5px] font-semibold text-emerald-100 backdrop-blur-xs sm:max-w-none sm:px-3 sm:text-[11px]">
+            <ShieldCheck className="h-3 w-3 shrink-0" />
+            <span className="truncate">G4S Secure Solutions Bangladesh (P) Ltd.</span>
+          </span>
 
-            <button
-              type="button"
-              onClick={onOpenCustomize}
-              className="inline-flex min-h-[30px] items-center gap-1.5 rounded-full bg-black/30 px-3 py-1 text-[11px] font-bold text-white backdrop-blur-xs transition-colors hover:bg-black/50 whitespace-nowrap shrink-0 cursor-pointer sm:min-h-[32px] sm:px-3.5 sm:text-xs"
-            >
-              <Sparkles className="h-3 w-3 text-emerald-300" />
-              <span>Customize</span>
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={onOpenCustomize}
+            className="inline-flex min-h-[30px] items-center gap-1.5 rounded-full bg-black/30 px-3 py-1 text-[11px] font-bold text-white backdrop-blur-xs transition-colors hover:bg-black/50 whitespace-nowrap shrink-0 cursor-pointer sm:min-h-[32px] sm:px-3.5 sm:text-xs"
+          >
+            <Sparkles className="h-3 w-3 text-emerald-300" />
+            <span>Customize</span>
+          </button>
         </div>
+      </div>
 
-        {/* Avatar & Location Single Row */}
+      <div className="flex flex-1 flex-col lg:grid lg:grid-cols-12 lg:items-stretch lg:gap-8">
+        <div className="lg:col-span-7 lg:flex lg:flex-col lg:justify-between">
+          <div>
+            {/* Avatar & Location Single Row */}
         <div className="mt-2 flex items-end justify-between gap-2 sm:mt-3 sm:gap-4">
           <div className="relative -mt-11 flex items-end gap-2.5 sm:-mt-16 sm:gap-3.5">
             <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border-3 border-white bg-[#E2EFE8] ring-2 ring-emerald-700/35 shadow-lg sm:h-32 sm:w-32 dark:border-[#0D1411] dark:bg-[#122019]">
@@ -184,7 +186,9 @@ export function HeroSection({
           </p>
         </div>
 
-        {/* Three Connected Identities: 3-column compact strip on mobile & desktop */}
+          </div>
+
+          {/* Three Connected Identities: 3-column compact strip on mobile & desktop */}
         <div className="mt-2.5 border-t border-[#E4ECE7] pt-2.5 sm:mt-4 sm:border-t-2 sm:pt-4 dark:border-[#24382E]">
           <div className="grid grid-cols-3 gap-1.5 sm:gap-3">
             {IDENTITY_PILLARS.map((pillar) => {
@@ -214,12 +218,12 @@ export function HeroSection({
             })}
           </div>
         </div>
-      </div>
+        </div>
 
-      {/* Unified Border Box: 8 Homepage Menus filling space between tags and footer */}
-      <div className="mt-2.5 flex flex-1 flex-col border-t border-[#E4ECE7] pt-2.5 sm:mt-4 sm:border-t-2 sm:pt-4 dark:border-[#24382E]">
+        {/* Unified Border Box: 8 Homepage Menus filling space between tags and footer */}
+        <div className="mt-2.5 flex flex-1 flex-col border-t border-[#E4ECE7] pt-2.5 sm:mt-4 sm:border-t-2 sm:pt-4 lg:col-span-5 lg:mt-3 lg:border-t-0 lg:pt-0 dark:border-[#24382E]">
         <div className="flex flex-1 flex-col rounded-2xl border-2 border-[#D8E6DE] bg-[#F4F8F5]/75 p-2 shadow-xs sm:p-3.5 dark:border-[#24382E] dark:bg-[#101814]/90">
-          <div className="grid flex-1 grid-cols-2 grid-rows-4 gap-1.5 sm:gap-2.5">
+          <div className="grid flex-1 grid-cols-2 grid-rows-4 gap-1.5 sm:gap-2.5 lg:grid-cols-1 lg:grid-rows-8 xl:grid-cols-2 xl:grid-rows-4">
             <button
               type="button"
               onClick={() => onSelectProjects('All')}
@@ -309,6 +313,7 @@ export function HeroSection({
             </button>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

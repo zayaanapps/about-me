@@ -15,7 +15,9 @@ import { ExploringSection } from './components/ExploringSection';
 import { GallerySection } from './components/GallerySection';
 import { ContactSection } from './components/ContactSection';
 import { CustomizeDrawer } from './components/CustomizeDrawer';
+import { DesktopSidebar } from './components/DesktopSidebar';
 import { OfflineIndicator } from './components/PWAInstallButton';
+import { useDeviceType } from './hooks/useDeviceType';
 import {
   clearSavedProfile,
   DEFAULT_PROFILE,
@@ -62,6 +64,7 @@ function getInitialTab(): string {
 }
 
 export default function App() {
+  useDeviceType();
   const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
   const [profile, setProfile] = useState<PersonalProfile>(loadSavedProfile);
   const [activeTab, setActiveTab] = useState<string>(getInitialTab);
@@ -170,59 +173,67 @@ export default function App() {
           onOpenCustomize={() => setCustomizeOpen(true)}
         />
 
-        <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-0 py-0 sm:px-8 sm:pt-6 sm:pb-6">
-          {activeTab === 'overview' && (
-            <HeroSection
-              profile={profile}
-              onSelectTab={handleSelectTab}
-              onSelectProjects={handleOpenProjects}
-              onOpenCustomize={() => setCustomizeOpen(true)}
-            />
-          )}
+        <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-0 py-0 sm:px-8 sm:pt-6 sm:pb-6 lg:max-w-6xl lg:flex-row lg:items-stretch lg:gap-6 xl:max-w-7xl">
+          <DesktopSidebar
+            activeTab={activeTab}
+            onSelectTab={handleSelectTab}
+            onOpenCustomize={() => setCustomizeOpen(true)}
+          />
 
-          {activeTab === 'about' && <AboutSection profile={profile} />}
+          <div className="flex min-w-0 flex-1 flex-col">
+            {activeTab === 'overview' && (
+              <HeroSection
+                profile={profile}
+                onSelectTab={handleSelectTab}
+                onSelectProjects={handleOpenProjects}
+                onOpenCustomize={() => setCustomizeOpen(true)}
+              />
+            )}
 
-          {activeTab === 'education' && <EducationSection />}
+            {activeTab === 'about' && <AboutSection profile={profile} />}
 
-          {activeTab === 'journey' && <JourneySection />}
+            {activeTab === 'education' && <EducationSection />}
 
-          {activeTab === 'expertise' && <ExpertiseSection />}
+            {activeTab === 'journey' && <JourneySection />}
 
-          {activeTab === 'technology' && <TechnologySection />}
+            {activeTab === 'expertise' && <ExpertiseSection />}
 
-          {activeTab === 'projects' && (
-            <ProjectsSection
-              projects={profile.projects}
-              activeFilter={projectFilter}
-              onFilterChange={setProjectFilter}
-              onAddProject={handleAddProject}
-              onDeleteProject={handleDeleteProject}
-              onNavigateContact={() => handleSelectTab('contact')}
-            />
-          )}
+            {activeTab === 'technology' && <TechnologySection />}
 
-          {activeTab === 'playground' && <PlaygroundSection />}
+            {activeTab === 'projects' && (
+              <ProjectsSection
+                projects={profile.projects}
+                activeFilter={projectFilter}
+                onFilterChange={setProjectFilter}
+                onAddProject={handleAddProject}
+                onDeleteProject={handleDeleteProject}
+                onNavigateContact={() => handleSelectTab('contact')}
+              />
+            )}
 
-          {activeTab === 'philosophy' && <PhilosophySection />}
+            {activeTab === 'playground' && <PlaygroundSection />}
 
-          {activeTab === 'beyond' && <BeyondWorkSection profile={profile} />}
+            {activeTab === 'philosophy' && <PhilosophySection />}
 
-          {activeTab === 'exploring' && <ExploringSection profile={profile} />}
+            {activeTab === 'beyond' && <BeyondWorkSection profile={profile} />}
 
-          {activeTab === 'gallery' && (
-            <GallerySection
-              gallery={profile.gallery}
-              onAddPhoto={handleAddPhoto}
-              onDeletePhoto={handleDeletePhoto}
-            />
-          )}
+            {activeTab === 'exploring' && <ExploringSection profile={profile} />}
 
-          {activeTab === 'contact' && <ContactSection profile={profile} />}
+            {activeTab === 'gallery' && (
+              <GallerySection
+                gallery={profile.gallery}
+                onAddPhoto={handleAddPhoto}
+                onDeletePhoto={handleDeletePhoto}
+              />
+            )}
+
+            {activeTab === 'contact' && <ContactSection profile={profile} />}
+          </div>
         </main>
 
         {/* Sticky Minimal Footer across all pages */}
-        <footer className="sticky bottom-0 z-30 w-full border-t-2 border-[#BBD1C5] bg-[#F2F7F4]/95 backdrop-blur-md transition-colors duration-300 dark:border-[#2C4438] dark:bg-[#0D1511]/95">
-          <div className="mx-auto flex h-[50px] max-w-5xl items-center justify-center px-4 sm:h-[56px] sm:px-8">
+        <footer className="sticky bottom-0 z-30 w-full border-t-2 border-[#BBD1C5] bg-[#F2F7F4]/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md transition-colors duration-300 dark:border-[#2C4438] dark:bg-[#0D1511]/95">
+          <div className="mx-auto flex h-[50px] max-w-5xl items-center justify-center px-4 sm:h-[56px] sm:px-8 lg:max-w-6xl xl:max-w-7xl">
             <p className="text-center font-mono text-xs font-bold tracking-tight text-[#0E1813] sm:text-[13px] dark:text-white">
               ©{' '}
               <a

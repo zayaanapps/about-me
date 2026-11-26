@@ -32,3 +32,15 @@
     scroll-behavior: auto;
   }
 }
+
+:root[data-device="mobile-ios"],
+:root[data-device="tablet-ipad"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root[data-device="mobile-ios"] body,
+:root[data-device="tablet-ipad"] body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
