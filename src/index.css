@@ -44,3 +44,10 @@
   overscroll-behavior-y: contain;
 }
 
+@media (max-height: 500px) {
+  #top {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+}

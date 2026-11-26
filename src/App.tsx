@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MotionConfig } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
@@ -70,6 +70,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<string>(getInitialTab);
   const [projectFilter, setProjectFilter] = useState<ProjectFilter>('All');
   const [customizeOpen, setCustomizeOpen] = useState(false);
+  const contentPaneRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -148,20 +149,20 @@ export default function App() {
       setProjectFilter('All');
     }
     setActiveTab(tabId);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    contentPaneRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleOpenProjects = (filter: ProjectFilter = 'All') => {
     setProjectFilter(filter);
     setActiveTab('projects');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    contentPaneRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <MotionConfig reducedMotion="user">
       <div
         id="top"
-        className="flex min-h-dvh flex-col bg-[#F7FAF8] text-[#0E1813] transition-colors duration-300 dark:bg-[#080C0A] dark:text-[#EFF4F1]"
+        className="flex h-dvh flex-col overflow-hidden bg-[#F7FAF8] text-[#0E1813] transition-colors duration-300 dark:bg-[#080C0A] dark:text-[#EFF4F1]"
       >
         <Navbar
           name={profile.name}
@@ -173,14 +174,19 @@ export default function App() {
           onOpenCustomize={() => setCustomizeOpen(true)}
         />
 
-        <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-0 py-0 sm:px-8 sm:pt-6 sm:pb-6 lg:max-w-6xl lg:flex-row lg:items-stretch lg:gap-6 xl:max-w-7xl">
+        <main className="mx-auto flex min-h-0 w-full max-w-5xl flex-1 flex-col overflow-hidden px-0 py-0 sm:px-8 sm:py-3.5 lg:max-w-6xl lg:flex-row lg:items-stretch lg:gap-6 lg:py-4 xl:max-w-7xl">
           <DesktopSidebar
             activeTab={activeTab}
             onSelectTab={handleSelectTab}
             onOpenCustomize={() => setCustomizeOpen(true)}
           />
 
-          <div className="flex min-w-0 flex-1 flex-col">
+          <div
+            ref={contentPaneRef}
+            className={`flex min-h-0 min-w-0 flex-1 flex-col ${
+              activeTab === 'overview' ? 'overflow-hidden' : 'overflow-y-auto'
+            }`}
+          >
             {activeTab === 'overview' && (
               <HeroSection
                 profile={profile}
